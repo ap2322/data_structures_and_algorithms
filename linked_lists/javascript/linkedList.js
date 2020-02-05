@@ -22,23 +22,28 @@ class List {
     this._length++;
   }
 
-  findLastNode(node){
-    if(node.nextNode.nextNode === null){
-      let lastNode = node.nextNode;
-      node.nextNode = null;
+
+  pop(){
+    if(this._length < 1){
+      return null;
+    } else if (this._length === 1){
+      this._length--;
+      let lastNode = this.head;
+      this.head = null;
       return lastNode;
+    } else if (this._length > 1){
+      console.log('start', this.head)
+      this.findLastNode(this.head);
     }
   }
 
-  pop(){
-    if(this._length === 1){
-      let lastNode = this.head;
-      this.head = null;
-      this._length--;
-      return lastNode;
-    } else if(this._length > 1){
-      return this.findLastNode(this.head);
+  findLastNode(node){
+    if(node.nextNode === null){
+      console.log('last', node)
+      return node;
+    } else {
+      console.log(node)
+      this.findLastNode(node.nextNode)
     }
-    return null;
   }
 }
